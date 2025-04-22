@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>С днюхой!</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: pink;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .ascii {
+    white-space: pre;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 10px;
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
+    /* Чтобы избежать наложений */
+    letter-spacing: 0.05em;
+    /* Для плавного масштабирования */
+    transform-origin: center top;
+    transition: transform 0.3s ease;
+    }
+
+    .message {
+    font-size: 1rem;
+    text-align: center;
+    white-space: pre-wrap;
+    overflow: hidden;
+    border-right: 2px solid #00ff99;
+    animation: blink .75s step-end infinite;
+    flex: 1; /* чтобы текст занимал доступное пространство */
+    color: red;
+    text-shadow: 0 0 5px #f00, 0 0 10px #f00;
+    }
+
+    .message span {
+      opacity: 0;
+      animation: show 0.05s forwards;
+    }
+
+    .glow {
+      color: red; /* цвет текста */
+      text-shadow: 0 0 5px #f00, 0 0 10px #f00; /* красное свечение */
+    }
+
+    .heart-frame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 800px;
+        margin-top: 2rem;
+    }
+
+    .heart {
+        font-size: 1.2rem;
+        margin: 0 0.8rem;
+        user-select: none;
+        white-space: nowrap;
+        color: red;
+        text-shadow: 0 0 5px #f00, 0 0 10px #f00;
+    }
+
+    .heart-frame .heart {
+      font-size: 1rem;
+      margin: 0 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .heart-frame .text {
+      max-width: 100%;
+      text-align: center;
+      white-space: pre-wrap;
+    }
+
+@media (max-width: 768px) {
+  .ascii {
+    transform: scale(1.5);
+    letter-spacing: 0.1em;
+    margin-bottom: 5rem; /* добавляем отступ снизу */
+  }
+}
+
+@media (max-width: 400px) {
+  .ascii {
+    transform: scale(2);
+    letter-spacing: 0.12em;
+    margin-bottom: 7rem; /* чуть больше отступа на очень маленьких экранах */
+  }
+}
+
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    @keyframes show {
+      from { opacity: 0 }
+      to { opacity: 1 }
+    }
+  </style>
+</head>
+<body>
+  <div class="ascii glow">
+    <pre>
+       ／＞　 フ
+       | 　_　_|
+     ／` ミ＿xノ
+    /　　　　 |
+   /　 ヽ　　 ﾉ
+  │　　|　|　|
+／￣|　　 |　|　|
+(￣ヽ＿_ヽ_)__)
+＼二)
+    </pre>
+  </div>
+
+  <!-- Оборачиваем #typewriter в контейнер с сердечками -->
+  <div class="heart-frame glow">
+    <div class="heart">{♥}</div>
+    <div class="message" id="typewriter"></div>
+    <div class="heart">{♥}</div>
+  </div>
+
+  <script>
+    const typewriter = document.getElementById('typewriter');
+    const text = "«Поздравляю c Днем Рождения!»\n— Искренне твой горе-программист.";
+    let i = 0;
+
+    function typeText() {
+      if (i < text.length) {
+        if (text[i] === '\n') {
+          typewriter.innerHTML += '<br>';
+        } else {
+          typewriter.innerHTML += `<span>${text[i]}</span>`;
+        }
+        i++;
+        setTimeout(typeText, 50);
+      }
+    }
+
+    typeText();
+  </script>
+</body>
+
+</html>
